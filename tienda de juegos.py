@@ -40,7 +40,7 @@ def opcion_menu():
             print("Debe ingresasr valores numericos, no letras")
 
 #-------------------------- otros defs
-def agregar_videojego(videojuegos,inventario):
+def agregar_videojuego(videojuegos,inventario):
     
     codigo = input("Ingrese el codigo del video juego").lower().strip()
 
@@ -86,19 +86,46 @@ def eliminar_videojuego(videojuegos,inventario):
 
     if codigo in videojuegos:
 
-        videojuegos.pop[codigo]
-        inventario.pop[codigo]
+        videojuegos.pop(codigo)
+        inventario.pop(codigo)
 
         print(" el juego a sido eliminado..")
 
     else:
         print("El video juego no existe, o ingreso mal los datos")
 
-def actualizar_videojuego():
-    print("hola")
+def actualizar_stok_videojuego(inventario):
     
-def mostrar_videojuego():
-    print("hola")
+    codigo = input("Ingrese el codigo del juego").lower().strip()
+
+    if codigo in inventario:
+
+        while True:
+            try:
+
+                nuevo_stok = int(input("Ingrese el nuevo stock del producto"))
+
+                inventario[codigo][1] = nuevo_stok
+
+                print("el stock a sido actualizado correctamente")
+                break
+
+            except ValueError:
+                print("ingreso un caracter no valido")
+            
+    else: 
+        print("juego buscado no existe")
+    
+def mostrar_videojuego(videojuegos,inventario):
+    
+    for codigo in videojuegos:
+        print("-------------------------------")
+        print("codigo : ",codigo)
+        print("nombre : ",videojuegos[codigo][0])
+        print("genero : ",videojuegos[codigo][1])
+        print("clasificacion : ", videojuegos[codigo][2])
+        print("precio : ", inventario[codigo][0])
+        print("stock : ", inventario[codigo][1])
 
 
 #------------------------- menu
@@ -110,19 +137,19 @@ while True:
     opcion_seleccionada = opcion_menu()
 
     if opcion_seleccionada == 1:
-        print(" agregando ")
+        agregar_videojuego(videojuegos,inventario)
 
     elif opcion_seleccionada == 2:
-        print("Buscando")
+        buscar_videojuego(videojuegos,inventario)
 
     elif opcion_seleccionada == 3:
-        print("eliminando")
+        eliminar_videojuego(videojuegos,inventario)
     
     elif opcion_seleccionada == 4:
-        print("Actualizando")
+        actualizar_stok_videojuego(inventario)
 
     elif opcion_seleccionada == 5:
-        print("mostrando")
+        mostrar_videojuego(videojuegos,inventario)
 
     elif opcion_seleccionada == 6:
         print("Saliendo del programa...")
